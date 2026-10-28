@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>A Little Birthday Surprise</title>
+<link rel="preload" as="image" href="home-bears.webp" type="image/webp">
+<link rel="preload" as="image" href="home-card-bears.webp" type="image/webp">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
@@ -45,9 +47,11 @@ body{font-family:'Fredoka','Trebuchet MS',sans-serif;background:linear-gradient(
 @keyframes puff{0%{opacity:.8;transform:translateY(0)}100%{opacity:0;transform:translateY(-26px) scale(1.8)}}
 .bounce{animation:bnc 1s ease infinite}
 @keyframes bnc{50%{transform:translateY(-8px)}}
-.hug,.phn{background-repeat:no-repeat;background-position:center;background-size:contain;flex:none}
-.hug{aspect-ratio:520/417}
+.hug,.phn{display:block;flex:none;position:relative;background-repeat:no-repeat;background-position:center;background-size:contain}
+.hug{aspect-ratio:760/610}
 .phn{aspect-ratio:520/317}
+.hug picture,.phn picture{display:block;width:100%;height:100%}
+.hug img,.phn img{display:block;width:100%;height:auto;aspect-ratio:inherit;object-fit:contain}
 .ttl .y{color:#fff8c4;-webkit-text-stroke-color:#f4b400;text-shadow:0 4px 0 #d99a00,0 8px 8px #d99a0055}
 .stage{position:relative;width:100%;max-width:340px;height:350px;margin-top:6px}
 .stage>*{position:absolute}
@@ -64,11 +68,11 @@ body{font-family:'Fredoka','Trebuchet MS',sans-serif;background:linear-gradient(
 .cutting #notch{animation:ntc .3s ease 1.65s forwards}
 #cutLayer #notch{opacity:0}
 @keyframes ntc{to{opacity:1}}
-.img-home{background-image:url(home-bears.png)}
-.img-home-card{background-image:url(home-card-bears.png)}
-.img-letter{background-image:url(letter-bears.png)}
-.img-appreciation{background-image:url(appreciation-bears.png)}
-.img-wish{background-image:url(wish-bears.png)}
+.img-home{background-image:url(home-bears.webp),url(home-bears.png)}
+.img-home-card{background-image:url(home-card-bears.webp),url(home-card-bears.png)}
+.img-letter{background-image:url(home-card-bears.webp),url(letter-bears.png)}
+.img-appreciation{background-image:url(home-card-bears.webp),url(appreciation-bears.png)}
+.img-wish{background-image:url(home-card-bears.webp),url(wish-bears.png)}
 .sheet{position:absolute;inset:0;background:#33415c66;display:none;align-items:center;justify-content:center;z-index:25;padding:18px}
 .sheet.show{display:flex}
 .sheet .card{max-width:340px;max-height:88%;overflow-y:auto;margin:0;animation:pup .35s cubic-bezier(.3,1.5,.5,1)}
@@ -112,10 +116,16 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
   <div class="ribbon">For someone who makes ordinary days feel special</div>
   <div class="flex items-center gap-2 mt-4 w-full justify-center">
     <div class="bubble">Hey, Birthday Star! 🎂</div>
-    <div class="phn img-home" style="width:170px;margin-left:-6px"></div>
+    <picture class="phn" style="width:170px;margin-left:-6px">
+      <source srcset="home-bears.webp" type="image/webp">
+      <img src="home-bears.png" alt="Cute bear on phone" width="520" height="317" loading="eager" fetchpriority="high" decoding="async">
+    </picture>
   </div>
   <div class="card text-center">
-    <div class="hug img-home-card" style="width:210px;margin:0 auto"></div>
+    <picture class="hug" style="width:210px;margin:0 auto">
+      <source srcset="home-card-bears.webp" type="image/webp">
+      <img src="home-card-bears.png" alt="Cute bears hugging" width="760" height="610" loading="eager" fetchpriority="high" decoding="async">
+    </picture>
     <h2 class="font-bold text-xl mt-2" style="color:#3d6ea8">✨ Happy Birthday ✨</h2>
     <p class="text-sm mt-2 px-2" style="color:#5b6b8a">I hope your day is filled with smiles, little surprises, and all the happiness you deserve.</p>
     <button class="btn blue" onclick="go(2)">Open Your Surprise ➔</button>
@@ -125,7 +135,6 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
 
 <!-- PAGE 2 -->
 <section class="page" id="p2">
-  
   <h1 class="ttl" style="margin-top:4px;font-size:2.2rem">Surprise<br><span class="p">for You!</span></h1>
   <div class="ribbon">Because you deserve all the happiness in the world!</div>
   <div class="card" style="margin-top:20px">
@@ -139,7 +148,12 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
       <p class="font-bold text-center mt-1" style="color:#e0508a">♥ Happy Birthday Once Again! ♥</p>
     </div>
     <div class="flex items-end justify-center gap-1 mt-2">
-      <span style="font-size:1.6rem">🌷</span><div class="hug img-letter" style="width:170px"></div><span style="font-size:1.6rem">🎂</span>
+      <span style="font-size:1.6rem">🌷</span>
+      <picture class="hug" style="width:170px">
+        <source srcset="home-card-bears.webp" type="image/webp">
+        <img src="home-card-bears.png" alt="Cute bears hugging" width="760" height="610" loading="lazy" decoding="async">
+      </picture>
+      <span style="font-size:1.6rem">🎂</span>
     </div>
     <div class="sticky" style="left:-8px;bottom:12px;transform:rotate(-8deg)">Stay Happy<br>Always ♡</div>
   </div>
@@ -148,7 +162,6 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
 
 <!-- PAGE 3 -->
 <section class="page" id="p3">
-  
   <h1 class="ttl" style="margin-top:4px;font-size:2.3rem">You're<br><span class="p">Awesome</span></h1>
   <div class="ribbon">Just a little reminder... because you truly are special!</div>
   <div class="card" style="margin-top:18px">
@@ -163,7 +176,10 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
       <span class="hand">Keep being you ♡</span>
       <div class="sticky" style="position:relative;transform:rotate(5deg);font-size:.95rem">The world is lucky to have you in it! ♥</div>
     </div>
-    <div class="hug img-appreciation" style="width:170px;margin:6px auto 0"></div>
+    <picture class="hug" style="width:170px;margin:6px auto 0">
+      <source srcset="home-card-bears.webp" type="image/webp">
+      <img src="home-card-bears.png" alt="Cute bears hugging" width="760" height="610" loading="lazy" decoding="async">
+    </picture>
   </div>
   <div class="ribbon" style="margin-top:14px;color:#d6457f;border-color:#ffb5d5;background:linear-gradient(#fff,#ffe6f1)">You're not just special today... You're Awesome Always! ♡</div>
   <button class="btn pink" onclick="go(4)">Let's Cut the Cake! 🎂 ➔</button>
@@ -171,11 +187,13 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
 
 <!-- PAGE 4 -->
 <section class="page" id="p4">
-  
   <h1 class="ttl" style="margin-top:20px;font-size:2.5rem"><span class="p">Make a</span> <span class="y">Wish!</span></h1>
   <p id="cakeMsg" class="font-medium mt-3 text-center" style="color:#3d6ea8;min-height:24px">Touch the candles to blow them out!</p>
   <div onclick="blow()" style="position:relative;width:100%;max-width:400px;margin-top:4px;cursor:pointer">
-    <img src="birthday-cake.png" alt="Bubu and Dudu with a birthday cake" style="display:block;width:100%;height:auto">
+    <picture style="display:block;width:100%;aspect-ratio:1/1">
+      <source srcset="birthday-cake.webp" type="image/webp">
+      <img src="birthday-cake.png" alt="Bubu and Dudu with a birthday cake" width="640" height="640" style="display:block;width:100%;height:auto;aspect-ratio:1/1" loading="lazy" decoding="async">
+    </picture>
     <svg viewBox="0 0 736 736" style="position:absolute;inset:0;width:100%;height:100%"><g transform="translate(127.5 259.4) scale(1.65)">
         <ellipse cx="150" cy="212" rx="120" ry="17" fill="#d7e9fb" stroke="#9ccaf5" stroke-width="2"/>
         <rect x="136" y="224" width="28" height="26" fill="#bcd9f6"/><ellipse cx="150" cy="252" rx="50" ry="9" fill="#bcd9f6" stroke="#9ccaf5" stroke-width="2"/>
@@ -208,14 +226,20 @@ textarea{width:100%;height:150px;resize:none;border:2px dashed #ff9cc6;border-ra
 
 <!-- PAGE 5 -->
 <section class="page" id="p5">
-  
   <h1 class="ttl" style="margin-top:20px;font-size:2.4rem"><span class="p">Make a</span> <span class="y">Wish!</span></h1>
   <div class="ribbon">For your very special someone 💖</div>
   <div class="card">
     <div class="sticky" style="right:-6px;top:-14px;transform:rotate(7deg);font-size:.9rem">For:<br>Birthday Person 🎂</div>
     <p class="text-sm font-medium pr-16 mb-3" style="color:#4a5a78">Dear Friend,<br>Enter your wish below for our Birthday Star! ✍️</p>
     <textarea id="wish" placeholder="(Type your sweet birthday wishes here... 💭✨)"></textarea>
-    <div class="flex items-end justify-center gap-2 mt-2"><span class="hand" style="font-size:1rem">Sending<br>Lots of</span><div class="hug img-wish" style="width:150px"></div><span class="hand" style="font-size:1rem">Love!</span></div>
+    <div class="flex items-end justify-center gap-2 mt-2">
+      <span class="hand" style="font-size:1rem">Sending<br>Lots of</span>
+      <picture class="hug" style="width:150px">
+        <source srcset="home-card-bears.webp" type="image/webp">
+        <img src="home-card-bears.png" alt="Cute bears hugging" width="760" height="610" loading="lazy" decoding="async">
+      </picture>
+      <span class="hand" style="font-size:1rem">Love!</span>
+    </div>
   </div>
   <button id="sendBtn" class="btn pink" onclick="sendWish()">🏠 Send Wish &amp; Go Home</button>
 </section>
@@ -358,7 +382,10 @@ function openRel(){
   ok.onclick=()=>submitRel(pick);
   const cls=h('button',{className:'cls',textContent:'✕',onclick:()=>{markDone();closeSheet()}});cls.setAttribute('aria-label','Close');
   openSheet(cls,h('span',{className:'fh',textContent:'💗',style:'left:12px;top:10px'}),h('span',{className:'fh',textContent:'✨',style:'left:50px;top:40px;animation-delay:.5s'}),
-    h('div',{className:'hug img-home-card',style:'width:120px;margin:0 auto'}),
+    h('picture',{className:'hug',style:'width:120px;margin:0 auto;display:block'},
+      h('source',{srcset:'home-card-bears.webp',type:'image/webp'}),
+      h('img',{src:'home-card-bears.png',alt:'Cute bears hugging',width:760,height:610,loading:'lazy',decoding:'async',style:'display:block;width:100%;height:auto;object-fit:contain'})
+    ),
     h('h3',{textContent:'💌 One Little Question',className:'font-bold text-lg',style:'color:#e0508a'}),
     h('p',{textContent:'Select your relationship with me? 💗',className:'text-sm mt-1 mb-2',style:'color:#4a5a78'}),opts,ok)}
 function submitRel(pick){
@@ -384,6 +411,17 @@ function closeModal(){
   go(1);
   if(pendingRel){pendingRel=false;setTimeout(openRel,2000);}
 }
+
+// Graceful fallback for any image that fails to load
+document.addEventListener('error', e => {
+  if (e.target && e.target.tagName === 'IMG') {
+    const img = e.target;
+    if (!img.dataset.retry && img.src.endsWith('.webp')) {
+      img.dataset.retry = '1';
+      img.src = img.src.replace(/\.webp$/, '.png');
+    }
+  }
+}, true);
 </script>
 </body>
 </html>
